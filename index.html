@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surprise For Uzhilla 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Poppins,sans-serif;background:linear-gradient(135deg,#ff9a9e,#fad0c4);text-align:center;color:#fff;}
+.container{padding:30px;max-width:600px;margin:auto;}
+button{padding:12px 20px;border:none;border-radius:25px;background:#ff4d6d;color:#fff;font-size:16px;cursor:pointer;margin-top:15px;}
+.hidden{display:none;}
+img{width:220px;border-radius:20px;margin-top:15px;}
+h1{font-family:Pacifico;}
+p{font-size:16px;line-height:1.6;}
+input{padding:10px;border-radius:20px;border:none;text-align:center;}
+.flower{position:fixed;top:-10px;font-size:20px;animation:fall linear infinite;}
+@keyframes fall{to{transform:translateY(100vh);}}
+</style>
+</head>
+<body>
+
+<div class="container" id="login">
+<h1>Enter Your Name 💖</h1>
+<input id="nameInput" placeholder="Type your name">
+<br><br>
+<button onclick="checkName()">Enter ✨</button>
+<p id="error"></p>
+</div>
+
+<div class="container hidden" id="p1">
+<h1>Welcome Uzhilla 💖</h1>
+<p>Here is a surprise made just for you 🎁✨</p>
+<img src="white-bear.gif">
+<br>
+<button onclick="next(2)">Open Gift 🎁</button>
+</div>
+
+<div class="container hidden" id="p2">
+<h1>Click the Box 🎁</h1>
+<img src="tkthao219-bubududu.gif" onclick="next(3)">
+<p>(Tap the gift)</p>
+</div>
+
+<div class="container hidden" id="p3">
+<h1>For You 💌</h1>
+<p>
+I heard about your leg cramp after falling from stairs 😔💔<br><br>
+• Please don’t walk too much, give your leg proper rest 🦵💤<br>
+• Keep your leg supported and comfortable 🛌✨<br>
+• Apply heat gently to reduce pain 🔥💖<br>
+• Stay hydrated and take care of your body 💧🌸<br>
+• Always listen to your body and relax 😌💫<br><br>
+You are strong, and you will recover soon 💕🌷
+</p>
+<button onclick="next(4)">Next</button>
+</div>
+
+<div class="container hidden" id="p4">
+<h1>Take Medicine 💊</h1>
+<img src="eat-your-medicine.gif">
+<p>
+• Always take your medicine on time ⏰💊<br>
+• Never skip any dose, even if you feel better 🚫💖<br>
+• Follow the schedule properly like a good girl 📅✨<br>
+• Drink enough water with medicines 💧💫<br>
+• Take care of your meals before medicine 🍲💗<br>
+• Trust the healing process and stay calm 🌸💞<br><br>
+Each dose is bringing you closer to recovery 💕
+</p>
+<button onclick="next(5)">Next</button>
+</div>
+
+<div class="container hidden" id="p5">
+<h1>Take Rest 🛌</h1>
+<img src="bubu.gif">
+<p>
+• Take proper bed rest and relax your body 🛏️💤<br>
+• Keep your leg slightly elevated for comfort 📈💖<br>
+• Avoid putting pressure on your ankle 🚫🦵<br>
+• Sleep peacefully and let your body heal 😴🌙<br>
+• Stay warm and cozy like this 🧸💞<br>
+• Don’t stress, everything will be okay soon 🌸✨<br><br>
+Rest is the sweetest medicine for you 💕
+</p>
+<button onclick="next(6)">Next</button>
+</div>
+
+<div class="container hidden" id="p6">
+<h1>Catch the Heart ❤️</h1>
+<p>Tap the moving heart 5 times to win 😄</p>
+<button id="heart" onclick="score()" style="position:relative;">❤️</button>
+<p id="score">Score: 0</p>
+</div>
+
+<div class="container hidden" id="p7">
+<h1>You Won 🎉</h1>
+<img src="kitkat-kitkatdd.gif">
+<p>Here’s a sweet KitKat for you 🍫💖 because you are amazing 🌸✨</p>
+<button onclick="next(8)">Next</button>
+</div>
+
+<div class="container hidden" id="p8">
+<h1>For You 🤗</h1>
+<img src="white-bear.gif">
+<img src="bubu.gif">
+<p>
+• Sending you the warmest hugs 🫂💖<br>
+• I hope your pain goes away soon 🌸✨<br>
+• Take care of yourself for me 💕<br>
+• You deserve all the comfort and happiness 💫<br>
+• I’ll always wish the best for you 🌷<br><br>
+Get well soon and keep smiling 😊💖
+</p>
+<button onclick="flowers();end()">Close 💌</button>
+</div>
+
+<script>
+let count=0;
+function checkName(){
+let name=document.getElementById('nameInput').value.toLowerCase();
+if(name==='uzhilla'){document.getElementById('login').classList.add('hidden');next(1);}else{document.getElementById('error').innerText='Only Uzhilla can open this 💖';}}
+function next(n){document.querySelectorAll('.container').forEach(d=>d.classList.add('hidden'));document.getElementById('p'+n).classList.remove('hidden');}
+function score(){count++;document.getElementById('score').innerText='Score: '+count;
+let heart=document.getElementById('heart');
+heart.style.left=Math.random()*200+'px';
+heart.style.top=Math.random()*100+'px';
+if(count>=5){next(7);}}
+function flowers(){for(let i=0;i<30;i++){let f=document.createElement('div');f.className='flower';f.innerText='🌸';f.style.left=Math.random()*100+'vw';f.style.animationDuration=(2+Math.random()*3)+'s';document.body.appendChild(f);}}
+function end(){setTimeout(()=>{alert('Take care 💖');},500);} 
+</script>
+
+</body>
+</html>
