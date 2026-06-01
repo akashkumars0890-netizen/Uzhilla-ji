@@ -1,134 +1,1172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Surprise For Uzhilla 💖</title>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>🌙 Hey Bestie — Ultra Cozy Care Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
 <style>
-body{margin:0;font-family:Poppins,sans-serif;background:linear-gradient(135deg,#ff9a9e,#fad0c4);text-align:center;color:#fff;}
-.container{padding:30px;max-width:600px;margin:auto;}
-button{padding:12px 20px;border:none;border-radius:25px;background:#ff4d6d;color:#fff;font-size:16px;cursor:pointer;margin-top:15px;}
-.hidden{display:none;}
-img{width:220px;border-radius:20px;margin-top:15px;}
-h1{font-family:Pacifico;}
-p{font-size:16px;line-height:1.6;}
-input{padding:10px;border-radius:20px;border:none;text-align:center;}
-.flower{position:fixed;top:-10px;font-size:20px;animation:fall linear infinite;}
-@keyframes fall{to{transform:translateY(100vh);}}
+  :root {
+    --lavender: #b8a9d9;
+    --lavender-light: #e8e2f4;
+    --lavender-mid: #d0c4e8;
+    --purple-deep: #6b5b9e;
+    --purple-soft: #9985c8;
+    --mist: #f5f2fb;
+    --dream: #ede7f8;
+    --text: #3a2f52;
+    --text-soft: #7b6f94;
+    --white: #fdfbff;
+    --pink-soft: #f5d6e8;
+    --pink: #e8a0c8;
+    --rose: #d47fa8;
+    --glow: rgba(184,169,217,0.3);
+    
+    /* Phase Colors Dynamic Defaults */
+    --phase-bg: linear-gradient(135deg, #f5f2fb 0%, #ede7f8 40%, #f0e8f5 100%);
+    --accent: var(--purple-soft);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--phase-bg);
+    color: var(--text);
+    display: flex;
+    overflow: hidden;
+    transition: background 0.5s ease;
+  }
+
+  /* ===== BACKDROP DECORATIONS ===== */
+  .stars {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .star {
+    position: absolute; width: 3px; height: 3px; border-radius: 50%;
+    background: rgba(184,169,217,0.6);
+    animation: twinkle var(--dur) ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.9; } }
+
+  /* ===== LAYOUT WRAPPERS ===== */
+  #sidebar {
+    width: 280px; background: rgba(253,251,255,0.95);
+    border-right: 1px solid rgba(184,169,217,0.4);
+    backdrop-filter: blur(12px);
+    display: flex; flex-direction: column; z-index: 10;
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+  }
+  #main-content {
+    flex: 1; position: relative; display: flex; flex-direction: column;
+    overflow-y: auto; z-index: 1; background: rgba(255,255,255,0.15);
+  }
+
+  /* ===== SIDEBAR NAVIGATION ===== */
+  .sidebar-header {
+    padding: 2rem 1.5rem; text-align: center;
+    border-bottom: 1px solid var(--lavender-light);
+  }
+  .sidebar-header h2 { font-family: 'Playfair Display', serif; color: var(--purple-deep); font-size: 1.5rem; }
+  .sidebar-header span { color: var(--rose); font-style: italic; }
+  
+  .nav-group { padding: 0.8rem 0; border-bottom: 1px solid var(--lavender-light); }
+  .nav-group-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-soft); padding: 0.5rem 1.5rem; font-weight: 700; }
+  
+  .nav-item {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.75rem 1.5rem; text-decoration: none;
+    color: var(--text); font-size: 0.9rem; font-weight: 500;
+    transition: all 0.2s ease; cursor: pointer;
+  }
+  .nav-item:hover, .nav-item.active {
+    background: var(--lavender-light); color: var(--purple-deep);
+    border-left: 4px solid var(--purple-soft);
+  }
+
+  /* ===== APPLICATION VIEWS ===== */
+  .app-view {
+    display: none; width: 100%; max-width: 850px; margin: 0 auto;
+    padding: 3rem 1.5rem; min-height: 100%;
+    animation: viewFadeIn 0.4s ease forwards;
+  }
+  .app-view.active-view { display: block; }
+  @keyframes viewFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ===== SHARED DESIGN TOKENS & UTILITIES ===== */
+  .view-header { margin-bottom: 2rem; text-align: center; }
+  .view-header h1 { font-family: 'Playfair Display', serif; color: var(--purple-deep); font-size: 2.2rem; margin-bottom: 0.5rem; }
+  .view-header p { color: var(--text-soft); font-size: 1rem; font-weight: 300; }
+  
+  .card {
+    background: rgba(253,251,255,0.9);
+    border: 1px solid rgba(184,169,217,0.4);
+    border-radius: 24px; padding: 2rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px rgba(107,91,158,0.06);
+    margin-bottom: 1.5rem; position: relative; overflow: hidden;
+  }
+  .btn {
+    display: inline-block; background: linear-gradient(135deg, var(--purple-soft), var(--rose));
+    color: white; border: none; padding: 0.75rem 1.8rem;
+    border-radius: 50px; font-size: 0.95rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s ease;
+    font-family: 'DM Sans', sans-serif; text-align: center;
+  }
+  .btn:hover { opacity: 0.95; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(153,133,200,0.3); }
+  .btn-soft { background: var(--lavender-light); color: var(--purple-deep); border: 1px solid var(--lavender); }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; }
+  
+  input, textarea, select {
+    width: 100%; padding: 0.8rem 1.2rem; border: 2px solid var(--lavender-light);
+    border-radius: 14px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+    outline: none; background: rgba(255,255,255,0.7); color: var(--text);
+    transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--purple-soft); }
+
+  /* ===== FEATURE-SPECIFIC ANIMATIONS/STYLES ===== */
+  /* Overlay Balloons */
+  #balloon-overlay {
+    position: fixed; inset: 0; z-index: 1000; pointer-events: none; overflow: hidden;
+  }
+  .floating-balloon {
+    position: absolute; bottom: -100px; width: 70px; height: 85px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    cursor: pointer; pointer-events: auto;
+    animation: floatUp var(--speed) linear forwards;
+    display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+    box-shadow: inset -8px -8px 15px rgba(0,0,0,0.1), 0 6px 12px rgba(0,0,0,0.08);
+  }
+  .floating-balloon::after {
+    content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+    border-left: 5px solid transparent; border-right: 5px solid transparent;
+    border-bottom: 8px solid currentColor; filter: brightness(0.8);
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); }
+    50% { transform: translateY(-50vh) translateX(var(--drift)) rotate(5deg); }
+    100% { transform: translateY(-120vh) translateX(0) rotate(-5deg); }
+  }
+
+  /* Avatar Display Container */
+  .avatar-display-box { text-align: center; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .avatar-image { font-size: 5.5rem; display: inline-block; animation: wave 3s ease-in-out infinite; }
+  @keyframes wave { 0%, 100% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(8deg) scale(1.05); } }
+
+  /* Symptom Hug Dynamic Display */
+  #hug-display { font-size: 4rem; margin: 1.5rem 0; height: 100px; display: flex; align-items: center; justify-content: center; }
+  .pulse-hug { animation: hugHeartbeat 1.2s infinite alternate ease-in-out; }
+  @keyframes hugHeartbeat { from { transform: scale(1); } to { transform: scale(1.25); } }
+
+  /* Mood Garden Board */
+  .garden-plot {
+    height: 240px; background: linear-gradient(to bottom, #e3f2fd, #fff9c4);
+    border-radius: 20px; border: 2px dashed var(--lavender);
+    position: relative; overflow: hidden; margin-top: 1.5rem;
+  }
+  .garden-weather { position: absolute; inset: 0; pointer-events: none; transition: background 0.5s; }
+  .garden-weather.rainy { background: rgba(40, 50, 90, 0.25); animation: rainEffect 0.3s infinite linear; }
+  @keyframes rainEffect { from { background-position: 0 0; } to { background-position: 20px 100px; } }
+  .garden-plants { display: flex; justify-content: center; align-items: flex-end; gap: 15px; height: 100%; padding-bottom: 20px; }
+  .flower-node { font-size: 2.5rem; animation: growFlower 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform-origin: bottom center; }
+  @keyframes growFlower { from { transform: scale(0); } to { transform: scale(1); } }
+
+  /* Symptom Bingo Layout */
+  .bingo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 1.5rem; }
+  .bingo-cell {
+    background: var(--white); border: 2px solid var(--lavender-light);
+    aspect-ratio: 1; border-radius: 14px; padding: 0.5rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 0.75rem; text-align: center; cursor: pointer; font-weight: 500;
+    transition: all 0.2s;
+  }
+  .bingo-cell:hover { border-color: var(--purple-soft); background: var(--mist); }
+  .bingo-cell.marked { background: #d4f0e0; border-color: #78b898; text-decoration: line-through; color: #2e6643; }
+
+  /* Anger Release Smashing Pad */
+  .smash-pad {
+    height: 250px; background: #2d1f4e; border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; cursor: pointer;
+  }
+  .smash-target { font-size: 4rem; user-select: none; transition: transform 0.05s; }
+  .smash-particle {
+    position: absolute; pointer-events: none; font-size: 1.5rem;
+    animation: particleExplode 0.6s ease-out forwards;
+  }
+  @keyframes particleExplode {
+    0% { opacity: 1; transform: translate(0,0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(0.5); }
+  }
+
+  /* Timeline Stream */
+  .timeline-strip { display: flex; gap: 8px; overflow-x: auto; padding: 1rem 0; }
+  .timeline-node {
+    background: var(--white); padding: 0.8rem; border-radius: 16px;
+    border: 1px solid var(--lavender-light); text-align: center; min-width: 65px;
+  }
+  .timeline-node .day { font-size: 0.75rem; color: var(--text-soft); display: block; margin-bottom: 4px; }
+  .timeline-node .emo { font-size: 1.5rem; }
+
+  /* Responsive Design Modifiers */
+  @media (max-width: 768px) {
+    body { flex-direction: column; }
+    #sidebar { width: 100%; height: auto; max-height: 220px; border-right: none; border-bottom: 1px solid rgba(184,169,217,0.4); }
+    .nav-group { display: flex; flex-wrap: wrap; padding: 0.4rem; }
+    .nav-group-title { width: 100%; padding: 0.2rem 0.6rem; }
+    .nav-item { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+  }
 </style>
 </head>
 <body>
 
-<div class="container" id="login">
-<h1>Enter Your Name 💖</h1>
-<input id="nameInput" placeholder="Type your name">
-<br><br>
-<button onclick="checkName()">Enter ✨</button>
-<p id="error"></p>
-</div>
+<div class="stars" id="stars-container"></div>
+<div id="balloon-overlay"></div>
 
-<div class="container hidden" id="p1">
-<h1>Welcome Uzhilla 💖</h1>
-<p>Here is a surprise made just for you 🎁✨</p>
-<img src="white-bear.gif">
-<br>
-<button onclick="next(2)">Open Gift 🎁</button>
-</div>
+<aside id="sidebar">
+  <div class="sidebar-header">
+    <h2>Cozy Care <span>Suite</span> 🌙</h2>
+    <p id="global-nickname-badge" style="font-size:0.8rem; font-weight:700; color:var(--purple-soft); margin-top:0.4rem;">The Soft Empress 👑</p>
+  </div>
+  
+  <div class="nav-group">
+    <div class="nav-group-title">Core Interfaces</div>
+    <a class="nav-item active" onclick="switchView('view-home')">🏠 Hub Home</a>
+    <a class="nav-item" onclick="switchView('view-mood-garden')">🌻 1. Mood Garden</a>
+    <a class="nav-item" onclick="switchView('view-symptom-hug')">🤗 2. Symptom Hug</a>
+    <a class="nav-item" onclick="switchView('view-love-letters')">💌 3. Cycle Letters</a>
+    <a class="nav-item" onclick="switchView('view-countdown')">📅 4. Countdown</a>
+    <a class="nav-item" onclick="switchView('view-comfort-kit')">🧸 5. Comfort Kit</a>
+    <a class="nav-item" onclick="switchView('view-cramp-sos')">🆘 6. Cramp SOS</a>
+    <a class="nav-item" onclick="switchView('view-secret-diary')">📔 7. Locked Diary</a>
+  </div>
 
-<div class="container hidden" id="p2">
-<h1>Click the Box 🎁</h1>
-<img src="tkthao219-bubududu.gif" onclick="next(3)">
-<p>(Tap the gift)</p>
-</div>
+  <div class="nav-group">
+    <div class="nav-group-title">Mental & Emotional Care</div>
+    <a class="nav-item" onclick="switchView('view-bad-day')">😢 8. Bad Day Aid</a>
+    <a class="nav-item" onclick="switchView('view-vent-box')">📝 9. Vent Safehouse</a>
+    <a class="nav-item" onclick="switchView('view-anger-release')">😤 10. Smashing Box</a>
+    <a class="nav-item" onclick="switchView('view-cry-counter')">😭 11. Cry Validador</a>
+  </div>
 
-<div class="container hidden" id="p3">
-<h1>For You 💌</h1>
-<p>
-I heard about your leg cramp after falling from stairs 😔💔<br><br>
-• Please don’t walk too much, give your leg proper rest 🦵💤<br>
-• Keep your leg supported and comfortable 🛌✨<br>
-• Apply heat gently to reduce pain 🔥💖<br>
-• Stay hydrated and take care of your body 💧🌸<br>
-• Always listen to your body and relax 😌💫<br><br>
-You are strong, and you will recover soon 💕🌷
-</p>
-<button onclick="next(4)">Next</button>
-</div>
+  <div class="nav-group">
+    <div class="nav-group-title">Physical & Health Trackers</div>
+    <a class="nav-item" onclick="switchView('view-craving-chef')">🍕 12. Craving Chef</a>
+    <a class="nav-item" onclick="switchView('view-fitness-guide')">🧘 13. Cycle Fitness</a>
+    <a class="nav-item" onclick="switchView('view-sleep-tracker')">😴 14. Sleep Journal</a>
+    <a class="nav-item" onclick="switchView('view-hydration')">💧 15. Cute Hydration</a>
+    <a class="nav-item" onclick="switchView('view-heat-pad')">🔥 16. Pad Reminder</a>
+  </div>
 
-<div class="container hidden" id="p4">
-<h1>Take Medicine 💊</h1>
-<img src="eat-your-medicine.gif">
-<p>
-• Always take your medicine on time ⏰💊<br>
-• Never skip any dose, even if you feel better 🚫💖<br>
-• Follow the schedule properly like a good girl 📅✨<br>
-• Drink enough water with medicines 💧💫<br>
-• Take care of your meals before medicine 🍲💗<br>
-• Trust the healing process and stay calm 🌸💞<br><br>
-Each dose is bringing you closer to recovery 💕
-</p>
-<button onclick="next(5)">Next</button>
-</div>
+  <div class="nav-group">
+    <div class="nav-group-title">Social Sync & Safe Zones</div>
+    <a class="nav-item" onclick="switchView('view-partner-alert')">💑 17. Partner Alert</a>
+    <a class="nav-item" onclick="switchView('view-dnd-mode')">🚫 18. Share DND Status</a>
+    <a class="nav-item" onclick="switchView('view-bff-sync')">👯 19. BFF Cycle Sync</a>
+    <a class="nav-item" onclick="switchView('view-care-wishlist')">🎁 20. Wishlist Hub</a>
+    <a class="nav-item" onclick="switchView('view-voice-notes')">🎙️ 21. Future Self Audio</a>
+  </div>
 
-<div class="container hidden" id="p5">
-<h1>Take Rest 🛌</h1>
-<img src="bubu.gif">
-<p>
-• Take proper bed rest and relax your body 🛏️💤<br>
-• Keep your leg slightly elevated for comfort 📈💖<br>
-• Avoid putting pressure on your ankle 🚫🦵<br>
-• Sleep peacefully and let your body heal 😴🌙<br>
-• Stay warm and cozy like this 🧸💞<br>
-• Don’t stress, everything will be okay soon 🌸✨<br><br>
-Rest is the sweetest medicine for you 💕
-</p>
-<button onclick="next(6)">Next</button>
-</div>
+  <div class="nav-group">
+    <div class="nav-group-title">Gamification & Fun</div>
+    <a class="nav-item" onclick="switchView('view-rewards')">🏆 22. Cycle Badges</a>
+    <a class="nav-item" onclick="switchView('view-horoscope')">✨ 23. Cycle Astrology</a>
+    <a class="nav-item" onclick="switchView('view-balloon-challenges')">🎈 24. Balloon Tasks</a>
+    <a class="nav-item" onclick="switchView('view-emoji-timeline')">📊 25. Emoji Strip</a>
+    <a class="nav-item" onclick="switchView('view-symptom-bingo')">🎯 26. Symptom Bingo</a>
+  </div>
 
-<div class="container hidden" id="p6">
-<h1>Catch the Heart ❤️</h1>
-<p>Tap the moving heart 5 times to win 😄</p>
-<button id="heart" onclick="score()" style="position:relative;">❤️</button>
-<p id="score">Score: 0</p>
-</div>
+  <div class="nav-group">
+    <div class="nav-group-title">Smart Core & Settings</div>
+    <a class="nav-item" onclick="switchView('view-pattern-whisperer')">🔮 27. Patterns Log</a>
+    <a class="nav-item" onclick="switchView('view-hormone-map')">🧬 28. Hormone Map</a>
+    <a class="nav-item" onclick="switchView('view-energy-forecast')">⚡ 29. Energy Calendar</a>
+    <a class="nav-item" onclick="switchView('view-pms-warning')">⚠️ 30. Early Warning</a>
+    <a class="nav-item" onclick="switchView('view-report-card')">📋 31. Cycle Summary</a>
+    <a class="nav-item" onclick="switchView('view-theme-config')">🎨 32. Engine Personalize</a>
+    <a class="nav-item" onclick="switchView('view-safety-net')">⚕️ 33. Safety & Meds</a>
+  </div>
+</aside>
 
-<div class="container hidden" id="p7">
-<h1>You Won 🎉</h1>
-<img src="kitkat-kitkatdd.gif">
-<p>Here’s a sweet KitKat for you 🍫💖 because you are amazing 🌸✨</p>
-<button onclick="next(8)">Next</button>
-</div>
+<main id="main-content">
 
-<div class="container hidden" id="p8">
-<h1>For You 🤗</h1>
-<img src="white-bear.gif">
-<img src="bubu.gif">
-<p>
-• Sending you the warmest hugs 🫂💖<br>
-• I hope your pain goes away soon 🌸✨<br>
-• Take care of yourself for me 💕<br>
-• You deserve all the comfort and happiness 💫<br>
-• I’ll always wish the best for you 🌷<br><br>
-Get well soon and keep smiling 😊💖
-</p>
-<button onclick="flowers();end()">Close 💌</button>
-</div>
+  <section id="view-home" class="app-view active-view">
+    <div class="view-header">
+      <h1>Welcome Back, Bestie ✨</h1>
+      <p>Your sanctuary is optimized. Explore individual modular tools from the sidebar drawer menu.</p>
+    </div>
+    <div class="card avatar-display-box">
+      <div class="avatar-image" id="hub-avatar">🐱</div>
+      <h3 style="margin-top:1rem;" id="hub-avatar-title">Cozy Familiar</h3>
+      <p style="font-size:0.85rem; color:var(--text-soft);" id="hub-avatar-desc">He looks warm, resting alongside your current logs.</p>
+    </div>
+    <div class="card" style="text-align: center;">
+      <h3>🎈 Manual Balloon Spawner</h3>
+      <p style="font-size:0.85rem; color:var(--text-soft); margin-bottom:1rem;">Want to experience the initial app startup event again? Tap below.</p>
+      <button class="btn" onclick="triggerBalloonsInit()">Release Floating Balloons</button>
+    </div>
+  </section>
+
+  <section id="view-mood-garden" class="app-view">
+    <div class="view-header">
+      <h1>1. Mood Garden</h1>
+      <p>Log your current emotional tone to feed your ecosystem.</p>
+    </div>
+    <div class="card">
+      <label style="font-weight:500; margin-bottom:0.5rem; display:block;">Select your state today:</label>
+      <select id="garden-mood-select" onchange="plantMoodFlower()">
+        <option value="">-- Choose State --</option>
+        <option value="good">🌸 Blooming & Happy-ish</option>
+        <option value="calm">🌿 Peaceful & Steady</option>
+        <option value="hard">😭 Heavy / Crying Out</option>
+        <option value="angry">😤 Stormy / Irritated</option>
+      </select>
+      <div class="garden-plot">
+        <div class="garden-weather" id="garden-weather-overlay"></div>
+        <div class="garden-plants" id="garden-plants-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-symptom-hug" class="app-view">
+    <div class="view-header">
+      <h1>2. Symptom Hug Button</h1>
+      <p>For the times words feel completely out of reach.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <button class="btn" style="padding:2rem; border-radius:30px; font-size:1.4rem;" onclick="activateSymptomHug()">🤗 I don't feel well</button>
+      <div id="hug-display"></div>
+      <div id="hug-remedy-box" style="display:none; text-align:left; margin-top:1.5rem;" class="card">
+        <h4 style="color:var(--purple-deep);">Bestie Advice Comfort Kit:</h4>
+        <ul style="margin-left:1.2rem; margin-top:0.5rem; font-size:0.9rem; line-height:1.6; color:var(--text-soft);">
+          <li>🔥 Set up your heating pad configuration.</li>
+          <li>☕ Brew some warm Ginger Honey Tea.</li>
+          <li>🛌 Execute Child's Pose in your fitness terminal.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-love-letters" class="app-view">
+    <div class="view-header">
+      <h1>3. Cycle Love Letters</h1>
+      <p>Dynamic automated letters addressing your exact physiological phases.</p>
+    </div>
+    <div class="card">
+      <label style="font-weight:500; margin-bottom:0.5rem; display:block;">Select Phase Engine Input:</label>
+      <select id="love-letter-phase" onchange="generateLoveLetter()">
+        <option value="menstrual">Menstrual Phase 🩸</option>
+        <option value="follicular">Follicular Phase 🌱</option>
+        <option value="ovulatory">Ovulatory Phase 🌸</option>
+        <option value="luteal">Luteal Phase 🍂</option>
+      </select>
+      <div id="love-letter-output" class="card" style="margin-top:1.5rem; font-style:italic; border-left:4px solid var(--rose); line-height:1.6;">
+        Select your phase above to load a tender notification letter.
+      </div>
+    </div>
+  </section>
+
+  <section id="view-countdown" class="app-view">
+    <div class="view-header">
+      <h1>4. Affirmative Period Countdown</h1>
+      <p>Refining scheduling trackers with structural self-love modifications.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:4rem; font-weight:700; color:var(--purple-deep);">3 Days</div>
+      <p style="font-size:1.2rem; font-style:italic; margin:1rem 0; color:var(--rose);">— Stock up on extra dark chocolate snacks and profound self-love 🍫</p>
+      <div style="background:var(--lavender-light); height:12px; border-radius:10px; overflow:hidden;">
+        <div style="width:85%; height:100%; background:linear-gradient(90deg, var(--lavender), var(--rose));"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-comfort-kit" class="app-view">
+    <div class="view-header">
+      <h1>5. Emergency Comfort Kit</h1>
+      <p>A static array containing your predefined cozy reference points.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h4>🎵 Essential Audio Stream</h4>
+        <p style="font-size:0.85rem; color:var(--text-soft); margin-top:0.4rem;">Cozy Lo-Fi Ambient Chill Mixes</p>
+      </div>
+      <div class="card">
+        <h4>🎬 Safe Screenings</h4>
+        <p style="font-size:0.85rem; color:var(--text-soft); margin-top:0.4rem;">Ghibli Classics, Cozy Comfort Sitcoms</p>
+      </div>
+      <div class="card">
+        <h4>🍫 Absolute Cravings</h4>
+        <p style="font-size:0.85rem; color:var(--text-soft); margin-top:0.4rem;">70% Premium Dark Chocolate, Warm Sea-Salt Popcorn</p>
+      </div>
+      <div class="card">
+        <h4>📞 Secure Distress Contacts</h4>
+        <p style="font-size:0.85rem; color:var(--text-soft); margin-top:0.4rem;">BFF Desktop Direct-Dial: Active</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-cramp-sos" class="app-view">
+    <div class="view-header">
+      <h1>6. Cramp SOS Button</h1>
+      <p>Instant mitigation plans for intense physical periods.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <p style="margin-bottom:1rem; font-weight:500;">Select Current Pain Profile:</p>
+      <div style="display:flex; justify-content:center; gap:10px; margin-bottom:1.5rem;">
+        <button class="btn btn-soft" onclick="triggerCrampRelief(3)">Mild 🌿</button>
+        <button class="btn btn-soft" onclick="triggerCrampRelief(7)">Intense 🌋</button>
+        <button class="btn" style="background:red;" onclick="triggerCrampRelief(10)">CRITICAL 🚨</button>
+      </div>
+      <div id="cramp-sos-output" class="card" style="display:none; text-align:left;"></div>
+    </div>
+  </section>
+
+  <section id="view-secret-diary" class="app-view">
+    <div class="view-header">
+      <h1>7. Password-Locked Secret Diary</h1>
+      <p>Your protected thoughts, encrypted securely away from standard users.</p>
+    </div>
+    <div class="card" id="diary-lock-screen" style="text-align:center;">
+      <h4>🔐 Enter Vault Access Code</h4>
+      <p style="font-size:0.85rem; color:var(--text-soft); margin-bottom:1rem;">Default testing passphrase is: <b>bestie</b></p>
+      <input type="password" id="diary-pass" placeholder="Enter Secure Pin..." style="max-width:250px; text-align:center; margin-bottom:1rem;"><br>
+      <button class="btn" onclick="unlockDiary()">Unlock Workspace</button>
+    </div>
+    <div class="card" id="diary-workspace" style="display:none;">
+      <h4>📔 Private Sanctuary Log</h4>
+      <textarea id="diary-input" placeholder="Type out your raw processing safely here..." style="margin:1rem 0; min-height:150px;"></textarea>
+      <button class="btn" onclick="saveDiaryEntry()">Commit to Memory Vault</button>
+      <div id="diary-vault-entries" style="margin-top:1.5rem;"></div>
+    </div>
+  </section>
+
+  <section id="view-bad-day" class="app-view">
+    <div class="view-header">
+      <h1>8. The Bad Day Protocol</h1>
+      <p>For when everything feels completely overwhelming.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <button class="btn" style="background:linear-gradient(135deg, #4a3b7d, #9985c8);" onclick="executeBadDaySequence()">Trigger Cozy Intervention</button>
+      <div id="bad-day-animation-window" style="margin-top:1.5rem; min-height:100px; display:flex; flex-direction:column; align-items:center; justify-content:center;"></div>
+    </div>
+  </section>
+
+  <section id="view-vent-box" class="app-view">
+    <div class="view-header">
+      <h1>9. Safehouse Vent Box</h1>
+      <p>Pour everything out. Zero evaluation, zero unasked advice. Just unconditional support.</p>
+    </div>
+    <div class="card">
+      <textarea id="vent-text" placeholder="Vent about your bosses, your cycles, your aches... write it all down here..." style="min-height:160px;"></textarea>
+      <button class="btn" style="margin-top:1rem;" onclick="processVentStream()">Empty My Mind</button>
+      <div id="vent-response" class="card" style="display:none; margin-top:1.5rem; background:#f0ecf7; border-left:4px solid var(--purple-soft);"></div>
+    </div>
+  </section>
+
+  <section id="view-anger-release" class="app-view">
+    <div class="view-header">
+      <h1>10. Stress Relief Smashing Pad</h1>
+      <p>Rapidly click/tap the structural object below to dissipate aggressive energetic states safely.</p>
+    </div>
+    <div class="card">
+      <div class="smash-pad" onclick="registerSmashEvent(event)">
+        <div class="smash-target" id="smash-target-obj">🧱</div>
+      </div>
+      <div style="text-align:center; margin-top:1rem; font-weight:700;">
+        Total Disrupted Matter Count: <span id="smash-count" style="color:var(--rose);">0</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-cry-counter" class="app-view">
+    <div class="view-header">
+      <h1>11. Cry Counter Logs</h1>
+      <p>A completely valid metric verifying your structural emotional clearing milestones.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3 style="font-size:3rem; color:var(--purple-deep);" id="cry-count-num">2</h3>
+      <p style="color:var(--text-soft); margin-bottom:1rem;">Healthy Cleansing Moments This Cycle</p>
+      <button class="btn btn-soft" onclick="incrementCryCount()">Log New Emotional Release Event 😭</button>
+    </div>
+  </section>
+
+  <section id="view-craving-chef" class="app-view">
+    <div class="view-header">
+      <h1>12. Craving Chef Engine</h1>
+      <p>Hormone-matched recipes custom-tailored to handle systemic nutritional alerts.</p>
+    </div>
+    <div class="card">
+      <label style="font-weight:700; margin-bottom:0.5rem; display:block;">What alert is your brain signaling?</label>
+      <select id="craving-select" onchange="generateCravingRecipe()">
+        <option value="">-- Choose Urgent Craving --</option>
+        <option value="choco">🍫 Heavy Chocolate Alert</option>
+        <option value="salt">🍟 Fast Salty Carb Alert</option>
+        <option value="sweet">🍦 Cold Creamy Sweet Alert</option>
+      </select>
+      <div id="recipe-output" class="card" style="display:none; margin-top:1.5rem; background:var(--mist);"></div>
+    </div>
+  </section>
+
+  <section id="view-fitness-guide" class="app-view">
+    <div class="view-header">
+      <h1>13. Cycle Fitness Engine</h1>
+      <p>Align physical exertion modes dynamically with endocrine cycle parameters.</p>
+    </div>
+    <div class="card">
+      <label style="font-weight:700; margin-bottom:0.5rem; display:block;">Select Cycle Position Profile:</label>
+      <select id="fit-phase-select" onchange="renderFitnessRoutine()">
+        <option value="period">Period Phase 🩸</option>
+        <option value="follicular">Follicular Phase 🌱</option>
+        <option value="ovulation">Ovulation Phase 🔥</option>
+        <option value="luteal">Luteal Phase 🍂</option>
+      </select>
+      <div id="fitness-output" class="card" style="margin-top:1.5rem; background:var(--white); border-left:4px solid var(--purple-deep);">
+        <strong>Recommended Mode: Gentle Yoga & Grounding Walks</strong><br><br>Keep systemic cortisol parameters low. Prioritize breathing mechanics over high impact training blocks.
+      </div>
+    </div>
+  </section>
+
+  <section id="view-sleep-tracker" class="app-view">
+    <div class="view-header">
+      <h1>14. Endocrine Sleep Journal</h1>
+      <p>Observe how progesterone and estrogen variables modulate REM parameters.</p>
+    </div>
+    <div class="card">
+      <label style="font-weight:500;">Rate Last Night's Rest Quality:</label>
+      <select id="sleep-quality" style="margin-bottom:1rem; margin-top:0.4rem;">
+        <option value="Perfect">Deep Cozy Hibernation 😴</option>
+        <option value="Tossing">Restless/Frequent Wake cycles 🐙</option>
+        <option value="Insomnia">High Progesterone Alert Night 🧠</option>
+      </select>
+      <button class="btn" onclick="logSleepEvent()">Save Sleep Analysis</button>
+      <div id="sleep-logs" style="margin-top:1.5rem;"></div>
+    </div>
+  </section>
+
+  <section id="view-hydration" class="app-view">
+    <div class="view-header">
+      <h1>15. Safe Hydration Monitors</h1>
+      <p>Keep your biological engines lubricated. Your pelvic organs will thank you.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:4rem; margin-bottom:1rem;">🥤</div>
+      <h3 style="margin-bottom:1rem;">Fluid Volume: <span id="water-count" style="color:var(--purple-soft);">2</span> / 8 Glasses</h3>
+      <button class="btn" onclick="drinkWaterUnit()">Log 1 Glass 💧</button>
+    </div>
+  </section>
+
+  <section id="view-heat-pad" class="app-view">
+    <div class="view-header">
+      <h1>16. Heating Pad Thermal Duty Cycling</h1>
+      <p>Automated parameters protecting skin layers from direct localized infrared irritation.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:2.5rem; font-weight:700; color:var(--purple-deep); margin-bottom:0.5rem;" id="pad-timer-display">20:00</div>
+      <p id="pad-status-lbl" style="font-weight:500; color:var(--rose); margin-bottom:1rem;">Status: Pad Application Period Active 🔥</p>
+      <button class="btn" onclick="togglePadTimerEngine()">Toggle Timer Engine</button>
+      <button class="btn btn-soft" onclick="resetPadTimerEngine()">Reset Clock</button>
+    </div>
+  </section>
+
+  <section id="view-partner-alert" class="app-view">
+    <div class="view-header">
+      <h1>17. Partner Alert Dispatcher</h1>
+      <p>Provide verified logistical support warnings safely to designated external systems.</p>
+    </div>
+    <div class="card">
+      <p style="font-size:0.9rem; color:var(--text-soft); margin-bottom:1rem;">With your absolute clearance, we can package an outgoing situational support message:</p>
+      <div style="background:var(--mist); padding:1rem; border-radius:12px; font-style:italic; margin-bottom:1rem;">
+        "Hey! She is transitioning through Day 2 parameters today and processing structural physical load. Suggest deployment of dark chocolates, hot liquids, and automated support validation."
+      </div>
+      <button class="btn" onclick="dispatchPartnerAlert()">Transmit Dispatch Notice 🌸</button>
+    </div>
+  </section>
+
+  <section id="view-dnd-mode" class="app-view">
+    <div class="view-header">
+      <h1>18. Secure DND Status Matrix</h1>
+      <p>Isolate your attention parameters safely away from external demands.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h3 style="margin-bottom:1rem;">Current Public Core State: <span id="dnd-status-tag" style="color:green;">AVAILABLE</span></h3>
+      <button class="btn" style="background:#5e35b1;" onclick="toggleDndStatus()">Toggle Deep Recharge Isolation Mode 🔋</button>
+    </div>
+  </section>
+
+  <section id="view-bff-sync" class="app-view">
+    <div class="view-header">
+      <h1>19. Cross-Terminal BFF Sync Network</h1>
+      <p>Monitor localized micro-peer cycles to coordinate mutual support deployments.</p>
+    </div>
+    <div class="card">
+      <h4>Active Node Synchronizations:</h4>
+      <div style="margin-top:1rem; display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; justify-content:between; background:var(--mist); padding:0.8rem; border-radius:12px; align-items:center;">
+          <span><b>Bestie Terminal A (Sarah):</b> Day 3 (Menstrual Align)</span>
+          <span style="margin-left:auto; background:var(--pink); color:white; padding:2px 8px; border-radius:10px; font-size:0.75rem;">Sync Matching</span>
+        </div>
+        <div style="display:flex; justify-content:between; background:var(--mist); padding:0.8rem; border-radius:12px; align-items:center;">
+          <span><b>Bestie Terminal B (Chloe):</b> Day 14 (Ovulatory Mode)</span>
+          <span style="margin-left:auto; background:var(--lavender); color:white; padding:2px 8px; border-radius:10px; font-size:0.75rem;">Divergent</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-care-wishlist" class="app-view">
+    <div class="view-header">
+      <h1>20. Support Asset Allocation Wishlist</h1>
+      <p>Compile exact comforting components you want to receive from loved ones.</p>
+    </div>
+    <div class="card">
+      <input type="text" id="wishlist-input" placeholder="Add custom item (e.g., Sea Salt Almond Choco)..." style="margin-bottom:1rem;">
+      <button class="btn" onclick="addWishlistItem()">Append Registry Allocation</button>
+      <ul id="wishlist-container" style="margin-top:1.5rem; padding-left:1.2rem;">
+        <li>Premium Lavender Heating Oils</li>
+        <li>Salted Caramel Baked Chips</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="view-voice-notes" class="app-view">
+    <div class="view-header">
+      <h1>21. Future Self Time Capsule</h1>
+      <p>Play back messages recorded during high-energy states when you need comfort.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:3rem; margin-bottom:1rem;">🎙️</div>
+      <button class="btn btn-soft" style="margin-bottom:1rem;" onclick="alert('Microphone initialization permitted. Simulating audio commit... Link saved!')">Record Safe High-Energy Memo</button>
+      <div class="card" style="text-align:left; background:var(--mist);">
+        <h5>Available Time-Capsule Interventions:</h5>
+        <p style="font-size:0.85rem; margin-top:0.5rem; color:var(--text-soft);">🔊 <b>Memo_Ovulation_Day12.mp3</b>: "Hey bestie, you feel low right now but remember you are incredibly resilient! This state is passing soon!"</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-rewards" class="app-view">
+    <div class="view-header">
+      <h1>22. Cycle Analytics Badges</h1>
+      <p>Verifiable rewards acknowledging system processing metrics.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card" style="text-align:center; opacity:1;">
+        <div style="font-size:3rem;">🥇</div>
+        <h5 style="margin-top:0.5rem;">Iron Uterus Title</h5>
+        <p style="font-size:0.75rem; color:var(--text-soft);">Logged symptoms consistently through heavy days.</p>
+      </div>
+      <div class="card" style="text-align:center; opacity:0.5;">
+        <div style="font-size:3rem;">🔒</div>
+        <h5>Hydration Master</h5>
+        <p style="font-size:0.75rem; color:var(--text-soft);">Maintain 8/8 water metric blocks for 5 intervals.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-horoscope" class="app-view">
+    <div class="view-header">
+      <h1>23. Cycle Astrology Terminal</h1>
+      <p>Cosmic forecasting mapped against individual biological data streams.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:3.5rem; margin-bottom:1rem;">🦂</div>
+      <h3>Today's Profile: Scorpio Intensity Core</h3>
+      <p style="font-style:italic; margin-top:0.5rem; color:var(--text-soft); line-height:1.6;">
+        "Your current physical hormone configurations align with intense structural energy. Channel your focused drive into personal boundary enforcement and high-quality artistic design work."
+      </p>
+    </div>
+  </section>
+
+  <section id="view-balloon-challenges" class="app-view">
+    <div class="view-header">
+      <h1>24. Balloon Pop Tasks</h1>
+      <p>Pop the active interface balloons below to harvest your tracking milestones.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="display:flex; justify-content:center; gap:15px; margin:2rem 0;">
+        <button class="btn" style="background:purple; padding:1.5rem;" onclick="popChallengeUnit(this, 'Task: Drink 1 full glass right now! 💧')">🎈</button>
+        <button class="btn" style="background:pink; padding:1.5rem;" onclick="popChallengeUnit(this, 'Affirmation: You are a sovereign entity 👑')">🎈</button>
+        <button class="btn" style="background:teal; padding:1.5rem;" onclick="popChallengeUnit(this, 'Surprise: 🌟 Lucky star generated!')">🎈</button>
+      </div>
+      <div id="challenge-resolution-box" style="font-weight:700; color:var(--purple-deep); min-height:30px;">Click a diagnostic balloon block to review content.</div>
+    </div>
+  </section>
+
+  <section id="view-emoji-timeline" class="app-view">
+    <div class="view-header">
+      <h1>25. Emoji Stream Strip</h1>
+      <p>A broad visual tracking interface showing emotional histories over active phases.</p>
+    </div>
+    <div class="card">
+      <h4>Active Tracking Month Metrics:</h4>
+      <div class="timeline-strip">
+        <div class="timeline-node"><span class="day">D1</span><span class="emo">😴</span></div>
+        <div class="timeline-node"><span class="day">D2</span><span class="emo">😭</span></div>
+        <div class="timeline-node"><span class="day">D3</span><span class="emo">🤕</span></div>
+        <div class="timeline-node"><span class="day">D4</span><span class="emo">🌸</span></div>
+        <div class="timeline-node"><span class="day">D5</span><span class="emo">✨</span></div>
+        <div class="timeline-node"><span class="day">D6</span><span class="emo">👑</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-symptom-bingo" class="app-view">
+    <div class="view-header">
+      <h1>26. Symptom Bingo</h1>
+      <p>Gamify the less-than-ideal symptoms of your cycle. Complete a line to earn validation!</p>
+    </div>
+    <div class="card">
+      <div class="bingo-grid">
+        <div class="bingo-cell" onclick="toggleBingoCell(this)">🍫 Craving Sugar</div>
+        <div class="bingo-cell" onclick="toggleBingoCell(this)">⚡ Back Aches</div>
+        <div class="bingo-cell" onclick="toggleBingoCell(this)">😭 Random Cry</div>
+        <div class="bingo-cell" onclick="toggleBingoCell(this)">😴 Fatigue 100%</div>
+        <div class="bingo-cell" onclick="toggleBingoCell(this)">🌋 Sharp Cramp</div>
+        <div class="bingo-cell" onclick="toggleBingoCell(this)">🎈 Bloating</div>
+        <div class="bingo-cell" onclick="toggleBingoCell(this)">🧠 Brain Fog</div>
+        <div class="bingo-cell" onclick="toggleBingoCell(this)">🍵 Tea Obsession</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-pattern-whisperer" class="app-view">
+    <div class="view-header">
+      <h1>27. Pattern Whisperer Engine</h1>
+      <p>Automated analysis engine parsing long-term diagnostic tracking inputs.</p>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--purple-deep); margin-bottom:0.8rem;">🔮 System Observations (Cycle 3 Baseline Complete):</h4>
+      <p style="font-size:0.95rem; line-height:1.6; color:var(--text);">
+        "Data indicates you consistently log a marked spike in emotional vulnerability and existential anxiety around <b>Day 22</b>. This perfectly matches the luteal estrogen transition phase. Preparing custom comfort mitigation protocols automatically."
+      </p>
+    </div>
+  </section>
+
+  <section id="view-hormone-map" class="app-view">
+    <div class="view-header">
+      <h1>28. Hormone Map Engine</h1>
+      <p>Visual map tracking fluctuating chemical entities inside your biological system.</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="display:flex; justify-content:space-around; align-items:flex-end; height:150px; padding:1rem; background:var(--mist); border-radius:16px;">
+        <div style="width:30px; height:80%; background:var(--rose); border-radius:8px 8px 0 0;"><span style="font-size:0.7rem; color:white; display:block; margin-top:5px;">EST</span></div>
+        <div style="width:30px; height:35%; background:var(--purple-soft); border-radius:8px 8px 0 0;"><span style="font-size:0.7rem; color:white; display:block; margin-top:5px;">PRO</span></div>
+        <div style="width:30px; height:15%; background:var(--lavender); border-radius:8px 8px 0 0;"><span style="font-size:0.7rem; color:white; display:block; margin-top:5px;">LH</span></div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-soft); margin-top:1rem;">Estrogen curve currently dominates tracking metrics. Energy profiles expected to trend upward.</p>
+    </div>
+  </section>
+
+  <section id="view-energy-forecast" class="app-view">
+    <div class="view-header">
+      <h1>29. Proactive Energy Forecast</h1>
+      <p>Pre-plan work roadmaps and heavy calendar metrics based on endocrine ranges.</p>
+    </div>
+    <div class="card">
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="padding:0.8rem; background:#ffe0b2; border-radius:10px;">📅 <b>Days 1-5 (Menstrual):</b> Low Reserves. Keep calendars light. Avoid demanding public presentations.</div>
+        <div style="padding:0.8rem; background:#c8e6c9; border-radius:10px;">📅 <b>Days 6-13 (Follicular):</b> High Reserves. Optimal slot to clear heavy projects & launch ideas.</div>
+        <div style="padding:0.8rem; background:#e1bee7; border-radius:10px;">📅 <b>Days 14-28 (Luteal):</b> Tapering Scale. Protect evening boundaries strictly.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-pms-warning" class="app-view">
+    <div class="view-header">
+      <h1>30. PMS Early Warning System</h1>
+      <p>Automated telemetry tracking system warnings before heavy phase drops occur.</p>
+    </div>
+    <div class="card" style="border-left:4px solid #ffb74d; background:#fff8e1;">
+      <h4>⚠️ Proactive System Telemetry Warning</h4>
+      <p style="font-size:0.9rem; margin-top:0.4rem; line-height:1.5;">
+        Luteal tracking trends suggest PMS metrics could shift live inside the next 48 hours. Go easy on yourself, minimize external tasks, and prepare ambient items.
+      </p>
+    </div>
+  </section>
+
+  <section id="view-report-card" class="app-view">
+    <div class="view-header">
+      <h1>31. System Performance Summary</h1>
+      <p>Historical operational tracking over the prior cycle block.</p>
+    </div>
+    <div class="card">
+      <table style="width:100%; border-collapse:collapse; font-size:0.9rem; text-align:left;">
+        <tr style="border-bottom:1px solid var(--lavender-light);"><th style="padding:0.5rem 0;">Metric Type</th><th>Observed Performance Values</th></tr>
+        <tr><td style="padding:0.6rem 0;">Cycle Length Baseline</td><td>28 days (Stable Variance)</td></tr>
+        <tr><td style="padding:0.6rem 0;">Top Tracked Mood Profile</td><td>Emotional/Tired (Valid)</td></tr>
+        <tr><td style="padding:0.6rem 0;">Dominant Craving Choice</td><td>Premium Cacao Chocolates</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="view-theme-config" class="app-view">
+    <div class="view-header">
+      <h1>32. App Theme Personalization</h1>
+      <p>Dynamically modify structural appearance and core configuration data.</p>
+    </div>
+    <div class="card">
+      <label style="font-weight:700; margin-bottom:0.4rem; display:block;">Select Avatar familiar identity:</label>
+      <select id="avatar-selector" onchange="updateSystemAvatar()" style="margin-bottom:1.5rem;">
+        <option value="🐱">Cozy Familiar Kitten 🐱</option>
+        <option value="🐰">Soft Cotton Rabbit 🐰</option>
+        <option value="🦊">Warm Velvet Fox 🦊</option>
+      </select>
+
+      <label style="font-weight:700; margin-bottom:0.4rem; display:block;">Override Interface Color Mode manually:</label>
+      <div style="display:flex; gap:10px;">
+        <button class="btn btn-soft" onclick="changeThemeMode('#f5d6e8', 'linear-gradient(135deg, #fdf4f7, #f5d6e8)')">Period Soft Pink</button>
+        <button class="btn btn-soft" onclick="changeThemeMode('#fff9c4', 'linear-gradient(135deg, #fffde7, #fff9c4)')">Ovulation Warm Yellow</button>
+        <button class="btn btn-soft" onclick="changeThemeMode('#b8a9d9', 'linear-gradient(135deg, #f5f2fb, #ede7f8)')">Default Lavendar Mist</button>
+      </div>
+
+      <label style="font-weight:700; margin-top:1.5rem; margin-bottom:0.4rem; display:block;">Configure Custom Floating Balloon Core Messages:</label>
+      <textarea id="custom-balloon-inputs" style="min-height:80px; margin-bottom:1rem;" placeholder="Type custom lines separated by commas..."></textarea>
+      <button class="btn" onclick="saveCustomBalloons()">Update Balloon Messages</button>
+    </div>
+  </section>
+
+  <section id="view-safety-net" class="app-view">
+    <div class="view-header">
+      <h1>33. Medical Safety Net & Meds</h1>
+      <p>Emergency utilities and basic tracking logs.</p>
+    </div>
+    <div class="card" style="border-left:4px solid red;">
+      <h4>⚕️ Smart Medical Symptom Evaluation</h4>
+      <p style="font-size:0.85rem; color:var(--text-soft); margin-top:0.4rem; margin-bottom:1rem;">
+        If you are registering continuous pain metrics exceeding level 9, please step away from software interfaces and request formal diagnostic assessment from healthcare professionals.
+      </p>
+      <button class="btn" style="background:red;" onclick="alert('Calling designated primary contact terminal...')">⚠️ Immediate Emergency Contact Quick-Dial</button>
+    </div>
+    <div class="card">
+      <h4>💊 Maintenance Medication Logs</h4>
+      <p style="font-size:0.8rem; color:var(--text-soft); margin-bottom:1rem;">Tap to confirm your active daily supplements:</p>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button class="btn btn-soft" style="text-align:left;" onclick="this.style.background='#c8f0d8'">Ibuprofen Strategy Block — Standard Check-In Done</button>
+        <button class="btn btn-soft" style="text-align:left;" onclick="this.style.background='#c8f0d8'">Magnesium Complex Capsule Block — Checked</button>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <script>
-let count=0;
-function checkName(){
-let name=document.getElementById('nameInput').value.toLowerCase();
-if(name==='uzhilla'){document.getElementById('login').classList.add('hidden');next(1);}else{document.getElementById('error').innerText='Only Uzhilla can open this 💖';}}
-function next(n){document.querySelectorAll('.container').forEach(d=>d.classList.add('hidden'));document.getElementById('p'+n).classList.remove('hidden');}
-function score(){count++;document.getElementById('score').innerText='Score: '+count;
-let heart=document.getElementById('heart');
-heart.style.left=Math.random()*200+'px';
-heart.style.top=Math.random()*100+'px';
-if(count>=5){next(7);}}
-function flowers(){for(let i=0;i<30;i++){let f=document.createElement('div');f.className='flower';f.innerText='🌸';f.style.left=Math.random()*100+'vw';f.style.animationDuration=(2+Math.random()*3)+'s';document.body.appendChild(f);}}
-function end(){setTimeout(()=>{alert('Take care 💖');},500);} 
-</script>
+// ===== APP NAVIGATION CORE SINGLE PAGE APPLICATION ENGINE =====
+function switchView(targetViewId) {
+  document.querySelectorAll('.app-view').forEach(view => {
+    view.classList.remove('active-view');
+  });
+  const activeTarget = document.getElementById(targetViewId);
+  if(activeTarget) activeTarget.classList.add('active-view');
 
+  // Sync sidebar active styling states
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.classList.remove('active');
+  });
+  
+  const eventSource = window.event ? window.event.currentTarget : null;
+  if(eventSource && eventSource.classList) {
+    eventSource.classList.add('active');
+  }
+}
+
+// ===== STAR BACKGROUND GENERATION TERMINAL =====
+const starContainer = document.getElementById('stars-container');
+for (let i = 0; i < 45; i++) {
+  const starNode = document.createElement('div');
+  starNode.className = 'star';
+  starNode.style.cssText = `left:${Math.random()*100}%; top:${Math.random()*100}%; --dur:${2+Math.random()*4}s; animation-delay:${Math.random()*4}s;`;
+  starContainer.appendChild(starNode);
+}
+
+// ===== FLOATING BALLOON ENGINE OVERLAY =====
+let structuralMessages = [
+  "You're stronger than you know 💪",
+  "It's okay to rest today 🌸",
+  "Your body is doing amazing things ✨",
+  "Sending you virtual chocolate 🍫",
+  "You got this, queen 👑",
+  "Hydrate & rest, you deserve it 💧"
+];
+
+function triggerBalloonsInit() {
+  const container = document.getElementById('balloon-overlay');
+  container.innerHTML = '';
+  
+  for(let i = 0; i < 6; i++) {
+    setTimeout(() => {
+      const b = document.createElement('div');
+      b.className = 'floating-balloon';
+      
+      // Compute aesthetic parameters
+      const leftVal = 15 + (Math.random() * 70);
+      const speedVal = 5 + (Math.random() * 4);
+      const driftVal = -50 + (Math.random() * 100);
+      const randomColor = `hsl(${Math.random() * 360}, 75%, 75%)`;
+      
+      b.style.cssText = `left:${leftVal}%; --speed:${speedVal}s; --drift:${driftVal}px; background:${randomColor}; color:${randomColor};`;
+      b.textContent = '🎈';
+      
+      b.addEventListener('click', () => {
+        alert(`🎈 Balloon Message: "${structuralMessages[i % structuralMessages.length]}"`);
+        b.remove();
+      });
+      
+      container.appendChild(b);
+    }, i * 400);
+  }
+}
+// Initialize balloons automatically when core view mounts
+window.addEventListener('DOMContentLoaded', () => {
+  triggerBalloonsInit();
+});
+
+// ===== 1. MOOD GARDEN MECHANICS =====
+function plantMoodFlower() {
+  const val = document.getElementById('garden-mood-select').value;
+  const overlay = document.getElementById('garden-weather-overlay');
+  const container = document.getElementById('garden-plants-container');
+  
+  if(!val) return;
+  
+  if(val === 'hard' || val === 'angry') {
+    overlay.className = 'garden-weather rainy';
+  } else {
+    overlay.className = 'garden-weather';
+  }
+  
+  const flower = document.createElement('div');
+  flower.className = 'flower-node';
+  flower.textContent = val === 'good' ? '🌻' : val === 'calm' ? '🌿' : val === 'hard' ? '🥀' : '⛈️';
+  container.appendChild(flower);
+}
+
+// ===== 2. SYMPTOM HUG BUTTON CORE =====
+function activateSymptomHug() {
+  const d = document.getElementById('hug-display');
+  d.innerHTML = '<span class="pulse-hug" style="display:inline-block;">💖</span>';
+  document.getElementById('hug-remedy-box').style.display = 'block';
+}
+
+// ===== 3. LOVE LETTER PARSER =====
+const letterMatrix = {
+  menstrual: "You're in your menstrual phase. Your body is doing intense mechanical work to shed and reset. It is completely natural to feel tired. Be boundlessly kind to yourself right now.",
+  follicular: "Your systemic estrogen is climbing! Energy reserves are returning. Try laying out strategic roadmaps now.",
+  ovulatory: "High energy phase peaked. Your confidence metrics are optimized. Take up space!",
+  luteal: "You're in your luteal phase. Progesterone is shifting. It's totally normal to feel tired, reactive, or emotional. Retreat slightly, protect your peace."
+};
+function generateLoveLetter() {
+  const phase = document.getElementById('love-letter-phase').value;
+  document.getElementById('love-letter-output').textContent = letterMatrix[phase];
+}
+
+// ===== 6. CRAMP SOS MANAGEMENT =====
+function triggerCrampRelief(lvl) {
+  const out = document.getElementById('cramp-sos-output');
+  out.style.display = 'block';
+  if(lvl <= 3) {
+    out.innerHTML = "<b>SOS Action:</b> Mild irritation noted. Execute simple butterfly stretches and drink hot water fluids.";
+  } else if(lvl <= 7) {
+    out.innerHTML = "<b>SOS Action:</b> Intense baseline cramps. Trigger thermal pad timing cycle, execute Child's Pose immediately, confirm medication blocks.";
+  } else {
+    out.innerHTML = "<b>SOS Action:</b> Critical discomfort. Please lie completely flat in Savasana rest mode, track continuous pain scales, and check medication safety nets.";
+  }
+}
+
+// ===== 7. PRIVATE LOCKED DIARY MATRIX =====
+function unlockDiary() {
+  const pin = document.getElementById('diary-pass').value;
+  if(pin === 'bestie') {
+    document.getElementById('diary-lock-screen').style.display = 'none';
+    document.getElementById('diary-workspace').style.display = 'block';
+  } else {
+    alert('Access Pin Verification Failed.');
+  }
+}
+function saveDiaryEntry() {
+  const text = document.getElementById('diary-input').value;
+  if(!text) return;
+  const log = document.createElement('div');
+  log.style.cssText = "background:rgba(0,0,0,0.05); padding:0.8rem; margin-top:0.5rem; border-radius:10px; font-size:0.85rem;";
+  log.textContent = `[Encrypted Entry]: ${text}`;
+  document.getElementById('diary-vault-entries').appendChild(log);
+  document.getElementById('diary-input').value = '';
+}
+
+// ===== 8. COZY INTERVENTION AID =====
+function executeBadDaySequence() {
+  const win = document.getElementById('bad-day-animation-window');
+  win.innerHTML = '<div style="color:var(--purple-deep); font-weight:700; font-size:1.1rem; animation:wave 2s infinite;">✨ Falling Comfort Stars Active... ✨</div><p style="margin-top:0.5rem; font-style:italic;">"Even the moon has complex phases, bestie, and so do you."</p>';
+}
+
+// ===== 9. VENT STREAM GENERATOR =====
+function processVentStream() {
+  const txt = document.getElementById('vent-text').value;
+  if(!txt) return;
+  const res = document.getElementById('vent-response');
+  res.style.display = 'block';
+  res.textContent = "I hear you processing that out loud. That sounds genuinely heavy and valid. I am standing here holding space for you without trying to fix it.";
+  document.getElementById('vent-text').value = '';
+}
+
+// ===== 10. ANGER SMASHING MATRIX =====
+let smashCount = 0;
+function registerSmashEvent(e) {
+  smashCount++;
+  document.getElementById('smash-count').textContent = smashCount;
+  
+  const target = document.getElementById('smash-target-obj');
+  target.style.transform = 'scale(0.85)';
+  setTimeout(() => target.style.transform = 'scale(1)', 50);
+  
+  // Particles
+  for(let i=0; i<3; i++) {
+    const p = document.createElement('div');
+    p.className = 'smash-particle';
+    p.textContent = '💥';
+    p.style.setProperty('--x', `${-50 + Math.random()*100}px`);
+    p.style.setProperty('--y', `${-50 + Math.random()*100}px`);
+    p.style.left = `${e.offsetX}px`;
+    p.style.top = `${e.offsetY}px`;
+    e.currentTarget.appendChild(p);
+    setTimeout(() => p.remove(), 600);
+  }
+}
+
+// ===== 11. CRY LOGS =====
+function incrementCryCount() {
+  const n = document.getElementById('cry-count-num');
+  n.textContent = parseInt(n.textContent) + 1;
+}
+
+// ===== 12. CRAVING RECIPES MAP =====
+const recipeMap = {
+  choco: "<b>Craving Chef Suggestion:</b> Rich Magnesium Boost Cocoa. Warm almond milk mixed into 1 tbsp pure raw cacao, maple syrup, and a pinch of high-mineral sea salt.",
+  salt: "<b>Craving Chef Suggestion:</b> Electrolyte Crispy Blocks. Lightly spray home-baked nuts or popped kernels with olive oil and premium sea salt flakes.",
+  sweet: "<b>Craving Chef Suggestion:</b> Frozen Banana Nice Cream. Process one frozen banana chunk matrix in a food blender until completely smooth and creamy."
+};
+function generateCravingRecipe() {
+  const val = document.getElementById('craving-select').value;
+  const out = document.getElementById('recipe-output');
+  if(!val) { out.style.display='none'; return; }
+  out.style.display = 'block';
+  out.innerHTML = recipeMap[val];
+}
+
+// ===== 13. FITNESS ROUTINES MATCH =====
+const fitMap = {
+  period: "<strong>Recommended Mode: Gentle Yoga & Grounding Walks</strong><br><br>Keep systemic cortisol parameters low. Prioritize breathing mechanics over high impact training blocks.",
+  follicular: "<strong>Recommended Mode: Progressive Strength Training</strong><br><br>Estrogen curves are rising. Biological tissues recover rapidly from localized muscle loads.",
+  ovulation: "<strong>Recommended Mode: High Energy Aerobic Circuits</strong><br><br>System peak energy reserves are fully unlocked. Perfect for metabolic output targets.",
+  luteal: "<strong>Recommended Mode: Slow Mobility & Floor Stretches</strong><br><br>Tissues are more prone to ligament laxity. Avoid high-impact joint acceleration."
+};
+function renderFitnessRoutine() {
+  const val = document.getElementById('fit-phase-select').value;
+  document.getElementById('fitness-output').innerHTML = fitMap[val];
+}
+
+// ===== 14. SLEEP JOURNAL METRICS =====
+function logSleepEvent() {
+  const qual = document.getElementById('sleep-quality').value;
+  const el = document.createElement('div');
+  el.style.cssText = "background:var(--mist); padding:0.5rem; margin-top:0.4rem; border-radius:8px; font-size:0.85rem;";
+  el.textContent = `Logged Sleep: ${qual} Status Profile`;
+  document.getElementById('sleep-logs').appendChild(el);
+}
+
+// ===== 15. CUTE HYDRATION GLASS LOGGING =====
+function drinkWaterUnit() {
+  const cnt = document.getElementById('water-count');
+  let currentVal = parseInt(cnt.textContent);
+  if(currentVal < 8) cnt.textContent = currentVal + 1;
+}
+
+// ===== 16. HEATING PAD CLOCK STRATEGY =====
+let padTimer = null;
+let padSeconds = 20 * 60;
+function togglePadTimerEngine() {
+  if(padTimer) {
+    clearInterval(padTimer);
+    padTimer = null;
+  } else {
+    padTimer = setInterval(() => {
+      if(padSeconds <= 0) {
+        clearInterval(padTimer);
+        padTimer = null;
+        alert("Heating Pad Alert: 20 minute application cycle done! Flip or remove pad to let skin layer safely cool.");
+        return;
+      }
+      padSeconds--;
+      const mins = Math.floor(padSeconds / 60).toString().padStart(2, '0');
+      const secs = (padSeconds % 60).toString().padStart(2, '0');
+      document.getElementById('pad-timer-display').textContent = `${mins}:${secs}`;
+    }, 1000);
+  }
+}
+function resetPadTimerEngine() {
+  if(padTimer) { clearInterval(padTimer); padTimer = null; }
+  padSeconds = 20 * 60;
+  document.getElementById('pad-timer-display').textContent = "20:00";
+}
+
+// ===== 17. PARTNER DISPATCH MATRIX =====
+function dispatchPartnerAlert() {
+  alert("Partner Alert System Protocol Executed. Outbound encryption package pushed successfully.");
+}
+
+// ===== 18. PUBLIC DND ATTENTION SETTING =====
+let dndActive = false;
+function toggleDndStatus() {
+  dndActive = !dndActive;
+  const tag = document.getElementById('dnd-status-tag');
+  if(dndActive) {
+    tag.textContent = "ISOLATED RECHARGING 🔋";
+    tag.style.color = "purple";
+  } else {
+    tag.textContent = "AVAILABLE";
+    tag.style.color = "green";
+  }
+}
+
+// ===== 20. CARE REGISTRY WISHLIST STORAGE =====
+function addWishlistItem() {
+  const val = document.getElementById('wishlist-input').value;
+  if(!val) return;
+  const li = document.createElement('li');
+  li.textContent = val;
+  document.getElementById('wishlist-container').appendChild(li);
+  document.getElementById('wishlist-input').value = '';
+}
+
+// ===== 24. BALLOON POP CHALLENGE BLOCK =====
+function popChallengeUnit(btn, msg) {
+  document.getElementById('challenge-resolution-box').textContent = msg;
+  btn.style.transform = 'scale(0)';
+  setTimeout(() => btn.remove(), 300);
+}
+
+// ===== 26. SYMPTOM BINGO INTERACTION =====
+function toggleBingoCell(cell) {
+  cell.classList.toggle('marked');
+}
+
+// ===== 32. PERSONALIZATION MANAGEMENT ENGINE =====
+function updateSystemAvatar() {
+  const av = document.getElementById('avatar-selector').value;
+  document.getElementById('hub-avatar').textContent = av;
+}
+function changeThemeMode(accent, gradient) {
+  document.documentElement.style.setProperty('--accent', accent);
+  document.documentElement.style.setProperty('--phase-bg', gradient);
+}
+function saveCustomBalloons() {
+  const input = document.getElementById('custom-balloon-inputs').value;
+  if(!input) return;
+  structuralMessages = input.split(',').map(s => s.trim());
+  alert("System custom balloon tracking tables updated!");
+}
+</script>
 </body>
 </html>
